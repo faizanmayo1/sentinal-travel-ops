@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Sentinel Travel Ops — Product Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #0d1320;
+    --body: #1d2438;
+    --muted: #6b7388;
+    --rule: #d9d3c4;
+    --paper: #f7f3ea;
+    --paper-warm: #efe9da;
+    --teal: #0d8a85;
+    --copper: #b8743a;
+    --severity-critical: #cb3744;
+    --severity-high: #c66722;
+    --severity-medium: #c89823;
+    --severity-low: #2f8a5c;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  @page {
+    size: A4;
+    margin: 14mm 14mm 14mm 14mm;
+  }
+
+  body {
+    font-family: "Geist", system-ui, sans-serif;
+    color: var(--body);
+    background: var(--paper);
+    font-size: 10.5pt;
+    line-height: 1.45;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .display { font-family: "Instrument Serif", Georgia, serif; }
+  .italic   { font-style: italic; }
+  .num      { font-family: "Geist Mono", monospace; font-variant-numeric: tabular-nums; }
+  .cap      {
+    font-family: "Geist Mono", monospace;
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+  }
+
+  /* ── Header ───────────────────────────────────────────── */
+  .header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 18px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .shield {
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--teal) 0%, #156d68 100%);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Instrument Serif", serif;
+    font-size: 15pt;
+  }
+  .brand-name {
+    font-family: "Instrument Serif", serif;
+    font-size: 18pt;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .brand-sub { font-size: 7.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .meta { text-align: right; font-size: 8.5pt; color: var(--muted); }
+  .meta strong { color: var(--ink); font-weight: 500; }
+
+  /* ── Title ────────────────────────────────────────────── */
+  h1 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: 30pt;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 6px 0;
+  }
+  h1 .accent { color: var(--copper); font-style: italic; }
+  h1 .teal { color: var(--teal); font-style: italic; }
+  .tagline {
+    font-size: 9.5pt;
+    color: var(--muted);
+    max-width: 540px;
+  }
+
+  /* ── Summary ──────────────────────────────────────────── */
+  .summary {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: var(--paper-warm);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--copper);
+    border-radius: 4px;
+  }
+  .summary .cap { color: var(--copper); margin-bottom: 6px; display: block; }
+  .summary p {
+    margin: 0;
+    font-family: "Instrument Serif", serif;
+    font-size: 13pt;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .summary .em { color: var(--teal); font-style: italic; }
+  .summary .num-em { font-family: "Geist Mono", monospace; color: var(--ink); }
+
+  /* ── Screens header ───────────────────────────────────── */
+  .screens-header {
+    margin: 22px 0 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .screens-header h2 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: 16pt;
+    margin: 0;
+    color: var(--ink);
+  }
+  .screens-header .rule { flex: 1; height: 1px; background: var(--rule); }
+
+  /* ── Screen cards ─────────────────────────────────────── */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .card {
+    padding: 10px 12px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    background: #fffefb;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .card .top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .card .num-tag {
+    font-family: "Geist Mono", monospace;
+    font-size: 8.5pt;
+    color: var(--muted);
+    background: var(--paper-warm);
+    border: 1px solid var(--rule);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+  .card .route {
+    font-family: "Geist Mono", monospace;
+    font-size: 8.5pt;
+    color: var(--teal);
+  }
+  .card h3 {
+    margin: 0 0 2px 0;
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: 13pt;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .card p {
+    margin: 4px 0 0 0;
+    font-size: 9.5pt;
+    line-height: 1.45;
+    color: var(--body);
+  }
+  .card .moment {
+    margin-top: 6px;
+    font-size: 8.5pt;
+    color: var(--copper);
+    font-style: italic;
+  }
+
+  .severity-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+
+  /* ── Footer ───────────────────────────────────────────── */
+  .footer {
+    margin-top: 18px;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: var(--muted);
+  }
+  .footer .badges {
+    display: flex;
+    gap: 12px;
+    font-family: "Geist Mono", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand">
+    <div class="shield">S</div>
+    <div>
+      <div class="brand-name">Sentinel <span style="font-style: italic; color: var(--copper)">Travel Ops</span></div>
+      <div class="brand-sub">Assistance &middot; Claims &middot; Containment</div>
+    </div>
+  </div>
+  <div class="meta">
+    <div><strong>Product Brief</strong></div>
+    <div>Prepared for prospect demo &middot; <span class="num">May 2026</span></div>
+  </div>
+</div>
+
+<h1>
+  One <span class="teal">control tower</span> for every traveler,<br />
+  every claim, <span class="accent">every dollar.</span>
+</h1>
+<p class="tagline">A single operational platform unifying emergency assistance, claims, providers, cost containment, and partner reporting — driven by AI and ready for SOC 2-grade environments.</p>
+
+<div class="summary">
+  <span class="cap">Product in 90 seconds</span>
+  <p>
+    Sentinel Travel Ops is a <span class="em">unified operations platform</span> for travel insurance and global assistance teams. Inbound from <span class="num-em">7 channels</span> &mdash; voice, WhatsApp, SMS, email, app, portal, partner APIs &mdash; lands in a single workspace where AI classifies, scores, and routes it in under a second. Low-value claims auto-adjudicate; complex cases reach specialists with full context. <span class="em">Cost containment</span> reads every hospital invoice line-by-line against regional benchmarks, preventing leakage before payment. <span class="em">Predictive risk</span> forecasts surge volume during disruptions and recommends staffing moves. Partners and leadership see live program-level dashboards with <span class="num-em">SOC 2</span>, ISO 27001, and GDPR controls baked in. <span class="em">Every action</span> is audit-logged forever and replayable on demand.
+  </p>
+</div>
+
+<div class="screens-header">
+  <h2>The 14 surfaces</h2>
+  <div class="rule"></div>
+  <span class="cap">14 modules &middot; 12 demo stops</span>
+</div>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="top">
+      <span class="num-tag">01</span>
+      <span class="route">/</span>
+    </div>
+    <h3>Command Center</h3>
+    <p>The home control tower &mdash; 312 active cases worldwide, urgent medical queue ranked by AI on severity and SLA risk, regional case-load gauges, and an AI co-pilot panel of next-best actions.</p>
+    <div class="moment">&bull; demo moment &middot; 8 urgent flagged &middot; live SLA countdowns</div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="num-tag">02</span>
+      <span class="route">/triage</span>
+    </div>
+    <h3>AI Triage</h3>
+    <p>Every inbound message is classified, language-pivoted, geo-located, urgency-scored, and routed in roughly <span class="num">312&nbsp;ms</span>. The page animates the reasoning trail live for one case so prospects see the work.</p>
+    <div class="moment">&bull; demo moment &middot; Marisol's WhatsApp &middot; animated reasoning</div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="num-tag">03</span>
+      <span class="route">/claims</span>
+    </div>
+    <h3>Claims Auto-Adjudication</h3>
+    <p>A live rules-engine animation walks a baggage claim through six checks &mdash; policy, documents, duplicates, threshold, fraud, decision &mdash; ending in an auto-approved disbursement. Complex claims route to human specialists with full context.</p>
+    <div class="moment">&bull; demo moment &middot; Lina B. $420 &middot; auto-approved live</div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="num-tag">04</span>
+      <span class="route">/cases</span>
+    </div>
+    <h3>Medical Case Management</h3>
+    <p>A single workspace per hospital admission with traveler identity, facility and attending physician, policy coverage, exposure, guarantee-of-payment status, full timeline, document checklist, and an AI-recommended next action.</p>
+    <div class="moment">&bull; demo moment &middot; CASE-8821 Mexico City admit</div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="num-tag">05</span>
+      <span class="route">/cost-containment</span>
+    </div>
+    <h3>Cost Containment</h3>
+    <p>Every hospital invoice is OCR'd and compared line-by-line against regional benchmarks. Inflated charges, duplicates, and non-reimbursable items are flagged before payment and routed into a negotiation workflow.</p>
+    <div class="moment">&bull; demo moment &middot; INV-4471 saves $7.4k</div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="num-tag">06</span>
+      <span class="route">/risk</span>
+    </div>
+    <h3>Predictive Risk &amp; Surge</h3>
+    <p>A live storm-radar scope plots travelers in the forecast cone, a 24-hour volume forecast projects inbound demand, and a surge protocol ranks staffing, partner, and traveler-comms actions to absorb the spike.</p>
+    <div class="moment">&bull; demo moment &middot; Tropical storm Esmeralda</div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="num-tag">07</span>
+      <span class="route">/inbox</span>
+    </div>
+    <h3>Omnichannel Inbox</h3>
+    <p>WhatsApp, voice, SMS, email, portal, and app collapse into one timeline per traveler. Auto-translated, sentiment-aware, AI-summarized so agents pick up cold without losing context.</p>
+    <div class="moment">&bull; demo moment &middot; Marisol thread &middot; 4 channels stitched</div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="num-tag">08</span>
+      <span class="route">/providers</span>
+    </div>
+    <h3>Provider Network</h3>
+    <p>A scored network of 512 hospitals worldwide. When a case opens, AI proposes the top three providers within seconds &mdash; ranked by clinical fit, prior settlement variance, and billing speed &mdash; with one-tap outreach.</p>
+    <div class="moment">&bull; demo moment &middot; Top 3 ranked for Mexico City</div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="num-tag">09</span>
+      <span class="route">/documents</span>
+    </div>
+    <h3>Document Intelligence</h3>
+    <p>Every page is OCR'd in source language, translated to English, classified, and auto-linked to the right case or claim. Confidence-scored extraction with missing-document and fraud-pattern alerts.</p>
+    <div class="moment">&bull; demo moment &middot; Spanish invoice extracted live</div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="num-tag">10</span>
+      <span class="route">/traveler-portal</span>
+    </div>
+    <h3>Traveler Portal</h3>
+    <p>The customer-side preview &mdash; case dashboard with real-time status and one-tap-to-agent, plus a guided AI-driven new-claim flow with smart document checklists. <span class="num">62%</span> of inquiries deflected from voice.</p>
+    <div class="moment">&bull; demo moment &middot; Two phone mockups side by side</div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="num-tag">11</span>
+      <span class="route">/partners</span>
+    </div>
+    <h3>Partner Operations</h3>
+    <p>One pane per insurer or partner program &mdash; their travelers, claims, cases, savings, SLA, and service-quality metrics in one exportable view. Switch between programs to see differentiated performance.</p>
+    <div class="moment">&bull; demo moment &middot; Allianz monthly dashboard</div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="num-tag">12</span>
+      <span class="route">/executive</span>
+    </div>
+    <h3>Executive BI</h3>
+    <p>A weekly AI-generated narrative briefing reads the week in one paragraph, calls out top wins and items to watch, plus a 7-week performance trend chart and a ranked list of bottlenecks worth surfacing.</p>
+    <div class="moment">&bull; demo moment &middot; AI brief &middot; export to board deck</div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="num-tag">13</span>
+      <span class="route">/audit</span>
+    </div>
+    <h3>Audit &amp; Access</h3>
+    <p>Every read, write, comm, and approval &mdash; from operator or AI service account &mdash; lands in an immutable WORM-archived audit log. Compliance posture for SOC 2 Type II, ISO 27001, GDPR, and HIPAA-aligned controls.</p>
+    <div class="moment">&bull; demo moment &middot; CASE-8821 audit replay</div>
+  </div>
+
+  <div class="card">
+    <div class="top">
+      <span class="num-tag">14</span>
+      <span class="route">internal</span>
+    </div>
+    <h3>Pilot Demo Setup</h3>
+    <p>Internal presenter control room (hidden from prospects). Toggles scenarios, exposes seed-data volumes, lists the 14-minute demo script with clickable jumps, and gates a preflight checklist before going live.</p>
+    <div class="moment">&bull; not shown to prospects &middot; presenter only</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div>Sentinel Travel Ops &middot; assistance, claims &amp; containment platform</div>
+  <div class="badges">
+    <span>SOC 2 Type II</span>
+    <span>ISO 27001</span>
+    <span>GDPR</span>
+  </div>
+</div>
+
+</body>
+</html>

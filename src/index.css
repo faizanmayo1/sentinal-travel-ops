@@ -1,0 +1,316 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Deep-ink operations console */
+    --background: 222 42% 4%;
+    --background-elevated: 222 32% 7%;
+    --foreground: 36 25% 94%;
+
+    --card: 222 30% 7%;
+    --card-foreground: 36 25% 94%;
+    --card-elevated: 222 26% 10%;
+
+    --popover: 222 32% 9%;
+    --popover-foreground: 36 25% 94%;
+
+    /* Signal teal — primary action, status "live" */
+    --primary: 174 78% 58%;
+    --primary-foreground: 222 42% 4%;
+
+    --secondary: 222 22% 12%;
+    --secondary-foreground: 36 20% 90%;
+
+    --muted: 222 20% 10%;
+    --muted-foreground: 215 14% 58%;
+
+    /* Warm copper — premium accent, AI / human moments */
+    --accent: 32 78% 64%;
+    --accent-foreground: 222 42% 4%;
+    --gold: 36 60% 56%;
+
+    --destructive: 354 78% 58%;
+    --destructive-foreground: 36 25% 96%;
+
+    --border: 222 18% 16%;
+    --border-soft: 222 22% 11%;
+    --input: 222 18% 16%;
+    --ring: 174 78% 58%;
+
+    /* Signal-tower severity — distinct from generic semaphore */
+    --severity-critical: 354 82% 60%;
+    --severity-high: 22 88% 60%;
+    --severity-medium: 40 92% 58%;
+    --severity-low: 158 58% 50%;
+
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "ss01" 1, "ss02" 1, "cv01" 1, "cv11" 1;
+    background-color: hsl(var(--background));
+    background-image:
+      radial-gradient(
+        ellipse 80% 60% at 50% -10%,
+        hsl(174 70% 30% / 0.12),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 95% 100%,
+        hsl(32 70% 40% / 0.08),
+        transparent 60%
+      );
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.4);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Instrument Serif", "Times New Roman", serif;
+    font-feature-settings: "ss01" 1;
+    letter-spacing: -0.01em;
+  }
+
+  .font-display-italic {
+    font-family: "Instrument Serif", "Times New Roman", serif;
+    font-style: italic;
+    letter-spacing: -0.015em;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .num {
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "ss01" 1;
+  }
+
+  .label-cap {
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .label-cap-tight {
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  /* Layered ink surfaces with hairline borders */
+  .surface-ink {
+    background: linear-gradient(
+        180deg,
+        hsl(var(--card)) 0%,
+        hsl(var(--card) / 0.96) 100%
+      );
+    border: 1px solid hsl(var(--border-soft));
+    box-shadow:
+      inset 0 1px 0 0 hsl(36 25% 94% / 0.03),
+      0 1px 2px 0 hsl(0 0% 0% / 0.4);
+  }
+
+  .surface-elevated {
+    background:
+      linear-gradient(
+        180deg,
+        hsl(var(--card-elevated)) 0%,
+        hsl(var(--card)) 100%
+      );
+    border: 1px solid hsl(var(--border));
+    box-shadow:
+      inset 0 1px 0 0 hsl(36 25% 94% / 0.04),
+      0 1px 0 0 hsl(0 0% 0% / 0.6),
+      0 12px 32px -16px hsl(0 0% 0% / 0.6);
+  }
+
+  /* Subtle instrument-panel grid — like aviation displays */
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(var(--border-soft) / 0.6) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border-soft) / 0.6) 1px, transparent 1px);
+    background-size: 56px 56px;
+    background-position: -1px -1px;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 90%);
+  }
+
+  /* Star-chart texture for hero stripes */
+  .starfield {
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, hsl(174 60% 70% / 0.6), transparent 60%),
+      radial-gradient(1px 1px at 70% 60%, hsl(36 60% 75% / 0.4), transparent 60%),
+      radial-gradient(1px 1px at 40% 80%, hsl(174 60% 70% / 0.3), transparent 60%),
+      radial-gradient(1px 1px at 85% 20%, hsl(36 60% 75% / 0.4), transparent 60%),
+      radial-gradient(1px 1px at 10% 70%, hsl(174 60% 70% / 0.5), transparent 60%);
+  }
+
+  .gradient-headline {
+    background: linear-gradient(
+      120deg,
+      hsl(36 30% 96%) 0%,
+      hsl(174 76% 75%) 45%,
+      hsl(32 78% 72%) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .gradient-rule {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--border)) 20%,
+      hsl(var(--border)) 80%,
+      transparent 100%
+    );
+  }
+
+  /* Subtle glow halos */
+  .glow-primary {
+    box-shadow:
+      0 0 0 1px hsl(var(--primary) / 0.2),
+      0 0 32px -4px hsl(var(--primary) / 0.4);
+  }
+
+  .glow-critical {
+    box-shadow:
+      0 0 0 1px hsl(var(--severity-critical) / 0.3),
+      0 0 24px -4px hsl(var(--severity-critical) / 0.45);
+  }
+
+  .glow-accent {
+    box-shadow:
+      0 0 0 1px hsl(var(--accent) / 0.2),
+      0 0 32px -8px hsl(var(--accent) / 0.4);
+  }
+
+  /* Pulse beacon for live status dots */
+  @keyframes pulse-beacon {
+    0% {
+      box-shadow: 0 0 0 0 currentColor;
+      opacity: 1;
+    }
+    100% {
+      box-shadow: 0 0 0 10px currentColor;
+      opacity: 0;
+    }
+  }
+
+  .beacon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .beacon::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 999px;
+    background: currentColor;
+    opacity: 0.4;
+    animation: pulse-beacon 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  /* Scanline ambience — barely visible, just enough to whisper "instrument" */
+  .scanlines::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        hsl(0 0% 0% / 0.18) 0px,
+        hsl(0 0% 0% / 0.18) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+    mix-blend-mode: overlay;
+    opacity: 0.4;
+  }
+
+  /* Telemetry tick — micro animation for "system is breathing" */
+  @keyframes telemetry {
+    0%, 100% { transform: scaleX(0.2); opacity: 0.3; }
+    50%      { transform: scaleX(1);   opacity: 1;   }
+  }
+
+  .telemetry-bar {
+    transform-origin: left center;
+    animation: telemetry 3s ease-in-out infinite;
+  }
+
+  /* Soft sweep for premium hover */
+  @keyframes sweep {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .sweep {
+    background-image: linear-gradient(
+      110deg,
+      transparent 30%,
+      hsl(36 25% 94% / 0.06) 50%,
+      transparent 70%
+    );
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    animation: sweep 6s linear infinite;
+  }
+
+  /* Stagger-reveal for page loads */
+  @keyframes rise-in {
+    0%   { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .rise {
+    opacity: 0;
+    animation: rise-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
