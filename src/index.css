@@ -5,42 +5,44 @@
 @layer base {
   /* ─────────────────────── LIGHT THEME (default) ─────────────────────── */
   :root {
-    --background: 36 30% 96%;
-    --background-elevated: 36 22% 92%;
-    --foreground: 222 35% 10%;
+    /* Body is warm cream; chrome (sidebar/topbar/hero) is a tighter cream
+       so the frame reads against the canvas. Cards drop to white for lift. */
+    --background: 36 28% 94%;
+    --background-elevated: 36 22% 88%;
+    --foreground: 222 40% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 35% 10%;
-    --card-elevated: 36 22% 98%;
+    --card-foreground: 222 40% 8%;
+    --card-elevated: 36 30% 99%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 35% 10%;
+    --popover-foreground: 222 40% 8%;
 
-    --primary: 174 76% 32%;
+    --primary: 174 82% 26%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 36 18% 90%;
-    --secondary-foreground: 222 35% 14%;
+    --secondary: 36 18% 88%;
+    --secondary-foreground: 222 38% 12%;
 
     --muted: 36 18% 92%;
-    --muted-foreground: 222 12% 38%;
+    --muted-foreground: 222 16% 30%;
 
-    --accent: 32 72% 44%;
+    --accent: 26 80% 38%;
     --accent-foreground: 0 0% 100%;
-    --gold: 36 65% 42%;
+    --gold: 34 74% 36%;
 
-    --destructive: 354 78% 46%;
+    --destructive: 354 80% 42%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 36 14% 80%;
-    --border-soft: 36 16% 86%;
-    --input: 36 14% 84%;
-    --ring: 174 76% 32%;
+    --border: 36 12% 74%;
+    --border-soft: 36 16% 84%;
+    --input: 36 14% 80%;
+    --ring: 174 82% 26%;
 
-    --severity-critical: 354 78% 46%;
-    --severity-high: 22 86% 44%;
-    --severity-medium: 40 88% 40%;
-    --severity-low: 158 58% 34%;
+    --severity-critical: 354 80% 42%;
+    --severity-high: 22 88% 38%;
+    --severity-medium: 40 88% 34%;
+    --severity-low: 158 68% 26%;
 
     --radius: 0.5rem;
 
@@ -185,8 +187,8 @@
     background: linear-gradient(180deg, hsl(var(--card-elevated)) 0%, hsl(var(--card)) 100%);
     border: 1px solid hsl(var(--border));
     box-shadow:
-      0 1px 2px 0 hsl(0 0% 0% / 0.04),
-      0 12px 32px -16px hsl(0 0% 0% / 0.10);
+      0 1px 2px 0 hsl(222 30% 18% / 0.06),
+      0 10px 28px -14px hsl(222 30% 18% / 0.18);
   }
 
   .dark .surface-elevated {
@@ -219,9 +221,9 @@
   .gradient-headline {
     background: linear-gradient(
       120deg,
-      hsl(222 35% 14%) 0%,
-      hsl(var(--primary)) 50%,
-      hsl(var(--accent)) 100%
+      hsl(222 42% 10%) 0%,
+      hsl(174 80% 26%) 45%,
+      hsl(26 82% 40%) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;

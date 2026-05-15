@@ -13,11 +13,13 @@ function apply(theme: Theme) {
 function getInitialTheme(): Theme {
   if (typeof window === "undefined") return "dark"
   try {
+    const url = new URL(window.location.href).searchParams.get("theme")
+    if (url === "light" || url === "dark") return url
     const stored = localStorage.getItem(STORAGE_KEY) as Theme | null
     if (stored === "light" || stored === "dark") return stored
   } catch { /* ignore */ }
-  // Default to dark — the demo's primary aesthetic
-  return document.documentElement.classList.contains("dark") ? "dark" : "dark"
+  // Default — match the inline script in index.html (dark unless overridden)
+  return document.documentElement.classList.contains("dark") ? "dark" : "light"
 }
 
 export function useTheme() {
