@@ -106,8 +106,9 @@ function PhoneFrame({ label, children }: { label: string; children: React.ReactN
       <div className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 rounded-sm border border-border bg-[hsl(var(--background-elevated))] px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
         {label}
       </div>
-      <div className="rounded-[36px] border border-border bg-[hsl(222_30%_5%)] p-2 shadow-[0_24px_60px_-20px_hsl(0_0%_0%/0.8),inset_0_1px_0_0_hsl(36_25%_94%/0.04)]">
-        <div className="relative overflow-hidden rounded-[28px] bg-[hsl(222_42%_6%)] ring-1 ring-border-soft">
+      {/* Phone is a physical device — always renders in its own dark mode regardless of app theme */}
+      <div className="dark rounded-[36px] border border-[hsl(222_18%_16%)] bg-[hsl(222_30%_5%)] p-2 text-foreground shadow-[0_24px_60px_-20px_hsl(0_0%_0%/0.45),inset_0_1px_0_0_hsl(36_25%_94%/0.04)]">
+        <div className="relative overflow-hidden rounded-[28px] bg-[hsl(222_42%_6%)] ring-1 ring-[hsl(222_22%_11%)]">
           {/* Status bar */}
           <div className="flex items-center justify-between px-5 pb-1.5 pt-3 text-[10px] text-foreground/80">
             <span className="num">10:42</span>
