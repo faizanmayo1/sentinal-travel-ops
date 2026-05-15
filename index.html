@@ -11,6 +11,18 @@
       rel="stylesheet"
     />
     <title>Sentinel Travel Ops — Assistance & Claims Cloud</title>
+    <script>
+      // Apply theme class before paint to avoid FOUC.
+      // Default is "dark"; users can switch via the topbar toggle.
+      (function () {
+        try {
+          var t = localStorage.getItem("sentinel.theme");
+          if (t !== "light") document.documentElement.classList.add("dark");
+        } catch (_) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

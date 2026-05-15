@@ -11,16 +11,19 @@ import {
   Inbox,
   LayoutDashboard,
   LineChart,
+  Moon,
   Search,
   Settings,
   ShieldCheck,
   Smartphone,
   Sparkles,
+  Sun,
   Wallet,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { useTheme } from "@/lib/theme"
 import { WorldClock } from "./WorldClock"
 
 type NavGroup = {
@@ -199,6 +202,7 @@ function Sidebar() {
 
 function TopBar() {
   const location = useLocation()
+  const { theme, toggle } = useTheme()
   const active = ALL.find((n) =>
     n.end ? location.pathname === n.to : location.pathname.startsWith(n.to)
   )
@@ -236,6 +240,16 @@ function TopBar() {
           <span className="beacon h-1.5 w-1.5 rounded-full bg-[hsl(var(--severity-low))] text-[hsl(var(--severity-low))]" />
           <span className="label-cap text-[9px]">All Systems</span>
         </div>
+        <Button
+          size="icon"
+          variant="ghost"
+          onClick={toggle}
+          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+          title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+          className="h-7 w-7"
+        >
+          {theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
+        </Button>
         <Button size="sm" variant="accent" className="h-7 gap-1.5 px-2.5 text-[11px]">
           <Sparkles className="h-3 w-3" /> AI Co-pilot
         </Button>

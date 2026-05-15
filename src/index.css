@@ -3,8 +3,53 @@
 @tailwind utilities;
 
 @layer base {
+  /* ─────────────────────── LIGHT THEME (default) ─────────────────────── */
   :root {
-    /* Deep-ink operations console */
+    --background: 36 30% 96%;
+    --background-elevated: 36 22% 92%;
+    --foreground: 222 35% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 35% 10%;
+    --card-elevated: 36 22% 98%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 35% 10%;
+
+    --primary: 174 76% 32%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 36 18% 90%;
+    --secondary-foreground: 222 35% 14%;
+
+    --muted: 36 18% 92%;
+    --muted-foreground: 222 12% 38%;
+
+    --accent: 32 72% 44%;
+    --accent-foreground: 0 0% 100%;
+    --gold: 36 65% 42%;
+
+    --destructive: 354 78% 46%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 36 14% 80%;
+    --border-soft: 36 16% 86%;
+    --input: 36 14% 84%;
+    --ring: 174 76% 32%;
+
+    --severity-critical: 354 78% 46%;
+    --severity-high: 22 86% 44%;
+    --severity-medium: 40 88% 40%;
+    --severity-low: 158 58% 34%;
+
+    --radius: 0.5rem;
+
+    /* used by inset highlights in surface utilities */
+    --highlight-rgb: 255 255 255;
+  }
+
+  /* ─────────────────────── DARK THEME (opt-in) ───────────────────────── */
+  .dark {
     --background: 222 42% 4%;
     --background-elevated: 222 32% 7%;
     --foreground: 36 25% 94%;
@@ -16,7 +61,6 @@
     --popover: 222 32% 9%;
     --popover-foreground: 36 25% 94%;
 
-    /* Signal teal — primary action, status "live" */
     --primary: 174 78% 58%;
     --primary-foreground: 222 42% 4%;
 
@@ -26,7 +70,6 @@
     --muted: 222 20% 10%;
     --muted-foreground: 215 14% 58%;
 
-    /* Warm copper — premium accent, AI / human moments */
     --accent: 32 78% 64%;
     --accent-foreground: 222 42% 4%;
     --gold: 36 60% 56%;
@@ -39,45 +82,36 @@
     --input: 222 18% 16%;
     --ring: 174 78% 58%;
 
-    /* Signal-tower severity — distinct from generic semaphore */
     --severity-critical: 354 82% 60%;
     --severity-high: 22 88% 60%;
     --severity-medium: 40 92% 58%;
     --severity-low: 158 58% 50%;
 
-    --radius: 0.5rem;
+    --highlight-rgb: 235 220 196;
   }
 
-  * {
-    @apply border-border;
-  }
+  * { @apply border-border; }
 
-  html,
-  body,
-  #root {
-    @apply h-full;
-  }
+  html, body, #root { @apply h-full; }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: "ss01" 1, "ss02" 1, "cv01" 1, "cv11" 1;
     background-color: hsl(var(--background));
     background-image:
-      radial-gradient(
-        ellipse 80% 60% at 50% -10%,
-        hsl(174 70% 30% / 0.12),
-        transparent 60%
-      ),
-      radial-gradient(
-        ellipse 60% 50% at 95% 100%,
-        hsl(32 70% 40% / 0.08),
-        transparent 60%
-      );
+      radial-gradient(ellipse 80% 60% at 50% -10%, hsl(var(--primary) / 0.06), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 95% 100%, hsl(var(--accent) / 0.05), transparent 60%);
     background-attachment: fixed;
   }
 
+  .dark body {
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, hsl(var(--primary) / 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 95% 100%, hsl(var(--accent) / 0.08), transparent 60%);
+  }
+
   ::selection {
-    background: hsl(var(--primary) / 0.3);
+    background: hsl(var(--primary) / 0.25);
     color: hsl(var(--foreground));
   }
 
@@ -86,9 +120,7 @@
     height: 8px;
   }
 
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
+  ::-webkit-scrollbar-track { background: transparent; }
 
   ::-webkit-scrollbar-thumb {
     background: hsl(var(--border));
@@ -113,9 +145,7 @@
     letter-spacing: -0.015em;
   }
 
-  .text-balance {
-    text-wrap: balance;
-  }
+  .text-balance { text-wrap: balance; }
 
   .num {
     font-family: "Geist Mono", ui-monospace, monospace;
@@ -138,34 +168,34 @@
     letter-spacing: 0.14em;
   }
 
-  /* Layered ink surfaces with hairline borders */
+  /* Layered surfaces — light theme has lighter shadow, dark gets the inset highlight */
   .surface-ink {
-    background: linear-gradient(
-        180deg,
-        hsl(var(--card)) 0%,
-        hsl(var(--card) / 0.96) 100%
-      );
+    background: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--card) / 0.96) 100%);
     border: 1px solid hsl(var(--border-soft));
+    box-shadow: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
+  }
+
+  .dark .surface-ink {
     box-shadow:
-      inset 0 1px 0 0 hsl(36 25% 94% / 0.03),
+      inset 0 1px 0 0 rgb(var(--highlight-rgb) / 0.03),
       0 1px 2px 0 hsl(0 0% 0% / 0.4);
   }
 
   .surface-elevated {
-    background:
-      linear-gradient(
-        180deg,
-        hsl(var(--card-elevated)) 0%,
-        hsl(var(--card)) 100%
-      );
+    background: linear-gradient(180deg, hsl(var(--card-elevated)) 0%, hsl(var(--card)) 100%);
     border: 1px solid hsl(var(--border));
     box-shadow:
-      inset 0 1px 0 0 hsl(36 25% 94% / 0.04),
+      0 1px 2px 0 hsl(0 0% 0% / 0.04),
+      0 12px 32px -16px hsl(0 0% 0% / 0.10);
+  }
+
+  .dark .surface-elevated {
+    box-shadow:
+      inset 0 1px 0 0 rgb(var(--highlight-rgb) / 0.04),
       0 1px 0 0 hsl(0 0% 0% / 0.6),
       0 12px 32px -16px hsl(0 0% 0% / 0.6);
   }
 
-  /* Subtle instrument-panel grid — like aviation displays */
   .grid-bg {
     background-image:
       linear-gradient(hsl(var(--border-soft) / 0.6) 1px, transparent 1px),
@@ -175,17 +205,31 @@
     mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 90%);
   }
 
-  /* Star-chart texture for hero stripes */
+  /* Stylized texture — adjusted per theme so it stays visible */
   .starfield {
     background-image:
-      radial-gradient(1px 1px at 20% 30%, hsl(174 60% 70% / 0.6), transparent 60%),
-      radial-gradient(1px 1px at 70% 60%, hsl(36 60% 75% / 0.4), transparent 60%),
-      radial-gradient(1px 1px at 40% 80%, hsl(174 60% 70% / 0.3), transparent 60%),
-      radial-gradient(1px 1px at 85% 20%, hsl(36 60% 75% / 0.4), transparent 60%),
-      radial-gradient(1px 1px at 10% 70%, hsl(174 60% 70% / 0.5), transparent 60%);
+      radial-gradient(1px 1px at 20% 30%, hsl(var(--primary) / 0.45), transparent 60%),
+      radial-gradient(1px 1px at 70% 60%, hsl(var(--accent)  / 0.30), transparent 60%),
+      radial-gradient(1px 1px at 40% 80%, hsl(var(--primary) / 0.25), transparent 60%),
+      radial-gradient(1px 1px at 85% 20%, hsl(var(--accent)  / 0.30), transparent 60%),
+      radial-gradient(1px 1px at 10% 70%, hsl(var(--primary) / 0.40), transparent 60%);
   }
 
+  /* Light + dark each gets its own gradient stops for legibility */
   .gradient-headline {
+    background: linear-gradient(
+      120deg,
+      hsl(222 35% 14%) 0%,
+      hsl(var(--primary)) 50%,
+      hsl(var(--accent)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .dark .gradient-headline {
     background: linear-gradient(
       120deg,
       hsl(36 30% 96%) 0%,
@@ -195,7 +239,6 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    color: transparent;
   }
 
   .gradient-rule {
@@ -208,26 +251,24 @@
     );
   }
 
-  /* Subtle glow halos */
   .glow-primary {
     box-shadow:
       0 0 0 1px hsl(var(--primary) / 0.2),
-      0 0 32px -4px hsl(var(--primary) / 0.4);
+      0 0 32px -4px hsl(var(--primary) / 0.3);
   }
 
   .glow-critical {
     box-shadow:
       0 0 0 1px hsl(var(--severity-critical) / 0.3),
-      0 0 24px -4px hsl(var(--severity-critical) / 0.45);
+      0 0 24px -4px hsl(var(--severity-critical) / 0.35);
   }
 
   .glow-accent {
     box-shadow:
       0 0 0 1px hsl(var(--accent) / 0.2),
-      0 0 32px -8px hsl(var(--accent) / 0.4);
+      0 0 32px -8px hsl(var(--accent) / 0.3);
   }
 
-  /* Pulse beacon for live status dots */
   @keyframes pulse-beacon {
     0% {
       box-shadow: 0 0 0 0 currentColor;
@@ -256,7 +297,6 @@
     animation: pulse-beacon 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
   }
 
-  /* Scanline ambience — barely visible, just enough to whisper "instrument" */
   .scanlines::after {
     content: "";
     pointer-events: none;
@@ -265,8 +305,8 @@
     background:
       repeating-linear-gradient(
         0deg,
-        hsl(0 0% 0% / 0.18) 0px,
-        hsl(0 0% 0% / 0.18) 1px,
+        hsl(0 0% 0% / 0.06) 0px,
+        hsl(0 0% 0% / 0.06) 1px,
         transparent 1px,
         transparent 3px
       );
@@ -274,7 +314,17 @@
     opacity: 0.4;
   }
 
-  /* Telemetry tick — micro animation for "system is breathing" */
+  .dark .scanlines::after {
+    background:
+      repeating-linear-gradient(
+        0deg,
+        hsl(0 0% 0% / 0.18) 0px,
+        hsl(0 0% 0% / 0.18) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+  }
+
   @keyframes telemetry {
     0%, 100% { transform: scaleX(0.2); opacity: 0.3; }
     50%      { transform: scaleX(1);   opacity: 1;   }
@@ -285,7 +335,6 @@
     animation: telemetry 3s ease-in-out infinite;
   }
 
-  /* Soft sweep for premium hover */
   @keyframes sweep {
     0%   { background-position: 200% 0; }
     100% { background-position: -200% 0; }
@@ -295,7 +344,7 @@
     background-image: linear-gradient(
       110deg,
       transparent 30%,
-      hsl(36 25% 94% / 0.06) 50%,
+      hsl(var(--foreground) / 0.06) 50%,
       transparent 70%
     );
     background-size: 200% 100%;
@@ -303,7 +352,6 @@
     animation: sweep 6s linear infinite;
   }
 
-  /* Stagger-reveal for page loads */
   @keyframes rise-in {
     0%   { opacity: 0; transform: translateY(8px); }
     100% { opacity: 1; transform: translateY(0); }
